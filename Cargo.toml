@@ -1,0 +1,12 @@
+[package]
+name = "easepay-sdk-rust"
+version = "0.1.0"
+edition = "2021"
+authors = ["Adeoye Adefemi <adefemiadeoye@yahoo.com>"]
+description = "A Rust SDK for the Easepay API"
+license = "MIT"
+repository = "https://github.com/easepay/easepay-sdk-rust"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
