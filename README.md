@@ -9,7 +9,7 @@
 
 
 ## Description
-Easepay NodeJs SDK is a library that allows you to easily interact with the Easepay API. It provides a simple and easy-to-use interface for the Easepay API. The SDK is built on top of the Axios library and provides a simple interface for making requests to the Easepay API.
+Easepay Rust SDK is a library that allows you to easily interact with the Easepay API in a Rust application. It provides a simple and easy-to-use interface for the Easepay API. The SDK is built on top of the Axios library and provides a simple interface for making requests to the Easepay API.
 
 ## Getting Started
 1.  Create an account on [Easepay](https://easepay.io)
