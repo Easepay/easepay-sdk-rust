@@ -1,8 +1,9 @@
-use serde::{Deserialize, Serialize};
 use reqwest::Client;
+use serde::{Deserialize, Serialize};
 
-mod pkg;
 mod constants;
+pub mod currency;
+mod pkg;
 
 use constants::API_URL;
 use pkg::EasepayClient;
@@ -16,39 +17,38 @@ pub struct Easepay {
 }
 
 impl Easepay {
-    pub fn new(api_key: &str, api_secret: &str) -> Easepay {
+    fn new(api_key: &str, api_secret: &str) -> Easepay {
         Easepay {
             api_key: api_key.to_string(),
             api_secret: api_secret.to_string(),
         }
     }
 
-
     /// the client makes the request to the server, essentiall it wraps around the reqwest client, adding the public and private keys to the request query
-    pub async fn client(&self) -> Client{
-       todo!("implement the client function")
-    }
-
-
-    /// the health function checks if the server is up and running
-    pub async fn health(&self) -> Result<(), reqwest::Error> {
-        let client = self.client().await;
-        let url = format!("{}{}", API_URL, "health");
-        let response = client.get(&url).send().await?;
-        response.error_for_status_ref()?;
-        Ok(())
-    }
-
-
-    /// the get_balance function returns the balance of the account
-    pub async fn get_balance(&self) -> Result<(), reqwest::Error> {
-        let client = self.client().await;
-        let url = format!("{}{}", API_URL, "balance");
-        let response = client.get(&url).send().await?;
-        response.error_for_status_ref()?;
-        Ok(())
+    pub async fn client(&self) -> Client {
+        todo!("implement the client function")
     }
 }
 
+impl EasepayClient for Easepay {
+    async fn health(&self) -> Result<(), reqwest::Error> {
+        self.client()
+            .await
+            .get(&format!("{}/health", API_URL))
+            .send()
+            .await?;
+        todo!()
+    }
 
+    async fn create_payment(&self) -> Result<(), reqwest::Error> {
+        todo!()
+    }
 
+    async fn payment_history(&self) -> Result<(), reqwest::Error> {
+        todo!()
+    }
+
+    async fn store_information(&self) -> Result<(), reqwest::Error> {
+        todo!()
+    }
+}
