@@ -2,7 +2,7 @@
 
 pub trait EasepayClient {
     /// the health function checks if the server is up and running
-    async fn health(&self) -> Result<(), reqwest::Error>;
+    async fn health(&self) -> Result<String, reqwest::Error>;
 
     /// the get_balance function returns the balance of the account
     async fn create_payment(&self) -> Result<(), reqwest::Error>;

@@ -9,8 +9,8 @@ pub enum Currency {
 impl Currency {
     pub fn to_string(&self) -> String {
         match self {
-            Currency::NGN => "NGN".to_string(),
-            Currency::USD => "USD".to_string(),
+            Currency::NGN => "NGN".to_lowercase(),
+            Currency::USD => "USD".to_lowercase(),
         }
     }
 }
