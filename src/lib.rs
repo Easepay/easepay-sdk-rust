@@ -1,15 +1,18 @@
 use std::collections::HashMap;
 
 use currency::Currency;
+use pkg::{ApiResponse, Store};
 use reqwest;
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
+
+use crate::constants::BASE_API_URL;
 
 mod constants;
-pub mod currency;
 mod pkg;
 
-use constants::BASE_API_URL;
-// use pkg::EasepayClient;
+pub mod currency;
+
 
 /// The Easepay struct is the main struct that holds the public and private keys
 #[derive(Debug, Serialize, Deserialize)]
@@ -37,7 +40,7 @@ impl Easepay {
     /// the client makes the request to the server, essentiall it wraps around the reqwest client, adding the public and private keys to the request query
     fn build_url(&self, request_path: &str) -> String {
         format!(
-            "{base_url}/{end_point}?public_key={public_key}&={secret_key}",
+            "{base_url}/{end_point}?publicKey={public_key}&secretKey={secret_key}",
             base_url = &BASE_API_URL,
             end_point = request_path.trim(),
             public_key = self.public_key,
@@ -55,7 +58,7 @@ impl Easepay {
         }
 
         format!(
-            "{base_url}/{end_point}?{queries}public_key={public_key}&={secret_key}",
+            "{base_url}/{end_point}?{queries}publicKey={public_key}&secretKey={secret_key}",
             base_url = &BASE_API_URL,
             end_point = request_path.trim(),
             public_key = self.public_key,
@@ -100,9 +103,22 @@ impl Easepay {
         // let resp = reqwest::post(path)
     }
 
-      async fn get_wallet_balance() {}
+    /// get the wallet balance
+    pub async fn get_wallet_balance(&self) -> Result<Value, reqwest::Error> {
+        let resp = reqwest::get(self.build_url("wallet/balance"))
+            .await?
+            .json()
+            .await?;
 
-    async fn get_store_information() {}
+        Ok(resp)
+    }
+
+    /// get the store information
+    pub async fn get_store_information(&self) -> Result<ApiResponse<Store>, reqwest::Error> {
+        let resp = reqwest::get(self.build_url("store")).await?.json().await?;
+
+        Ok(resp)
+    }
 
     async fn get_transaction_history() {}
 
@@ -117,6 +133,4 @@ impl Easepay {
     async fn store_information(&self) -> Result<(), reqwest::Error> {
         todo!()
     }
-
-  
 }
