@@ -6,7 +6,7 @@ async fn main() {
     let secret_key: String = String::from("");
 
     let easepay = Easepay::new(&public_key, &secret_key);
-    let resp = easepay.health().await;
+    let resp = easepay.get_wallet_balance().await;
 
     println!("{:?}", resp);
 }
