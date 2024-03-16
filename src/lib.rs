@@ -100,6 +100,12 @@ impl Easepay {
         // let resp = reqwest::post(path)
     }
 
+      async fn get_wallet_balance() {}
+
+    async fn get_store_information() {}
+
+    async fn get_transaction_history() {}
+
     async fn create_payment(&self) -> Result<(), reqwest::Error> {
         todo!()
     }
@@ -112,9 +118,5 @@ impl Easepay {
         todo!()
     }
 
-    async fn get_wallet_balance() {}
-
-    async fn get_store_information() {}
-
-    async fn get_transaction_history() {}
+  
 }
